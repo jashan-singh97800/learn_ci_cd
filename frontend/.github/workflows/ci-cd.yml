@@ -2,12 +2,12 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ feature/landing_page ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main, master, feature/landing_page ]
 
 env:
-  DOCKER_IMAGE: your-username/your-frontend-app
+  DOCKER_IMAGE: jashandeepsingh802/ci_cd
   DOCKER_TAG: ${{ github.sha }}
 
 defaults:
@@ -45,7 +45,7 @@ jobs:
     name: Build and Deploy
     needs: test
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/feature/landing_page' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
     
     steps:
     - name: Checkout code
