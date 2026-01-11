@@ -2,9 +2,9 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ feature/landing_page ]
+    branches: [ main, master]
   pull_request:
-    branches: [ main, master, feature/landing_page ]
+    branches: [ main, master]
 
 env:
   DOCKER_IMAGE: jashandeepsingh802/ci_cd
