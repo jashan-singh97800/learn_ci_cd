@@ -17,7 +17,7 @@ env:
 
 defaults:
   run:
-    working-directory: ./
+    working-directory: ./frontend  # <- run all npm commands inside frontend folder
 
 jobs:
   test:
@@ -50,7 +50,6 @@ jobs:
     name: Build and Deploy
     needs: test
     runs-on: ubuntu-latest
-    # Only deploy for main or master branch
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
     
     steps:
@@ -69,7 +68,7 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v4
       with:
-        context: .
+        context: ./frontend  # <- build Docker image from frontend folder
         push: true
         tags: ${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_TAG }},${{ env.DOCKER_IMAGE }}:latest
         cache-from: type=gha
